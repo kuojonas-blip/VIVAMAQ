@@ -65,10 +65,7 @@ const VIVAMAQ_FOOTER = `
       </a>
       <p style="margin-top:0.75rem">${CONFIG.slogan}</p>
       <div class="footer-social">
-        <a href="${CONFIG.instagram}" target="_blank">In</a>
-        <a href="#" target="_blank">Fb</a>
-        <a href="#" target="_blank">Li</a>
-        <a href="#" target="_blank">Yt</a>
+        <a href="${CONFIG.instagram}" target="_blank" aria-label="Instagram">Ig</a>
       </div>
     </div>
     <div class="footer-col">
