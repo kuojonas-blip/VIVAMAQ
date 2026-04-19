@@ -1,55 +1,24 @@
-═══════════════════════════════════════════
-  VIVAMAQ — Kit de Site | Guia de Deploy
-═══════════════════════════════════════════
+Correções aplicadas nesta versão da home:
 
-ESTRUTURA DE PASTAS (montar exatamente assim):
-──────────────────────────────────────────
-vivamaq/
-├── index.html          ← página inicial
-├── style.css           ← estilos globais
-├── components.js       ← nav + footer + whatsapp
-├── vercel.json         ← config de deploy
-├── logo.jpeg           ← logo da VIVAMAQ (raiz)
-└── media/
-    ├── Amassadeira.png
-    ├── Batedeira.png
-    ├── Laminadora.png
-    ├── Ultracongelador.jpg
-    ├── Forno.jpg           ← adicionar depois
-    ├── Divisora.jpg        ← adicionar depois
-    └── Blender.jpg         ← adicionar depois
+1. Hero com 4 slides:
+- Amassadeira
+- Batedeira
+- Forno
+- Laminadora
 
-LOGO NO NAV E FOOTER:
-──────────────────────────────────────────
-A logo usa filter:brightness(0) invert(1) para
-ficar branca sobre o fundo escuro.
-Se quiser versão colorida, remova esse filter
-no components.js (linha com "filter:brightness").
+2. Nomes EXATOS dos vídeos que precisam estar na pasta media/:
+- video_amassadeira.mp4
+- video_batedeira.mp4
+- video_forno.mp4
+- video_laminadora.mp4
 
-COMO ADICIONAR FOTOS DOS PRODUTOS FALTANTES:
-──────────────────────────────────────────
-1. Coloque as fotos na pasta media/
-2. No index.html, procure os comentários:
-   <!-- Adicionar: media/Forno.jpg -->
-3. Substitua o bloco pelo padrão:
-   <img src="media/NomeDaFoto.jpg" alt="Nome">
+3. Se os vídeos não rodarem, os motivos mais comuns são:
+- arquivo está em .MOV e não em .MP4
+- nome diferente do esperado
+- pasta media/ fora da raiz do projeto
+- navegador bloqueando autoplay por causa de codec incompatível
 
-DEPLOY NO VERCEL (grátis):
-──────────────────────────────────────────
-1. Acesse vercel.com e faça login
-2. Clique em "Add New > Project"
-3. Arraste a pasta vivamaq/ inteira
-4. Clique em "Deploy"
-5. Pronto! URL gerada automaticamente.
-
-CONTATOS CONFIGURADOS:
-──────────────────────────────────────────
-WhatsApp : +55 54 99321-0110
-E-mail   : comercial@vivamaq.com
-Endereço : São Paulo — SP
-Horário  : Seg–Sex, 8h às 18h
-
-Para alterar qualquer dado, edite o bloco
-CONFIG no início do arquivo components.js.
-
-═══════════════════════════════════════════
+4. Recomendação:
+- usar MP4 H.264
+- sem áudio
+- tamanho reduzido

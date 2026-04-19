@@ -4,410 +4,252 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VIVAMAQ — Máquinas que crescem com você</title>
-  <meta name="description" content="VIVAMAQ — Equipamentos profissionais para panificação e alimentação. Amassadeiras, fornos, batedeiras, divisoras, ultracongeladores, laminadores e blenders.">
-  <meta name="keywords" content="amassadeira, forno padaria, batedeira industrial, divisora de massa, ultracongelador, laminador, blender industrial, equipamentos panificação">
+  <meta name="description" content="VIVAMAQ — Equipamentos profissionais para panificação. Amassadeiras, fornos, batedeiras, laminadores, ultracongeladores, divisoras e blenders.">
   <link rel="stylesheet" href="style.css">
 
   <style>
-    /* ── HERO ── */
     .hero { position:relative; height:100vh; overflow:hidden; }
     .hero-slides { width:100%; height:100%; }
     .hero-slide { position:absolute; inset:0; opacity:0; transition:opacity 0.8s; }
     .hero-slide.active { opacity:1; }
-    .hero-slide video, .hero-slide img { width:100%; height:100%; object-fit:cover; }
+    .hero-slide video,
+    .hero-slide img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
 
-    /* Overlay vermelho quente no lado esquerdo */
+    .hero-fallback {
+      position:absolute;
+      inset:0;
+      background:linear-gradient(135deg,#1a1a1a 0%,#2c1010 100%);
+    }
+
     .hero-overlay {
       position:absolute; inset:0;
       background: linear-gradient(
         105deg,
-        rgba(26,26,26,0.88) 0%,
+        rgba(26,26,26,0.82) 0%,
         rgba(160,40,30,0.18) 55%,
-        rgba(26,26,26,0.05) 100%
+        rgba(26,26,26,0.06) 100%
       );
     }
 
-    .hero-content { position:absolute; bottom:14%; left:5%; max-width:620px; color:#fff; }
-    .hero-label {
-      display:inline-block; font-size:0.68rem; font-weight:600;
-      letter-spacing:0.22em; text-transform:uppercase;
-      color:#fff; background:var(--red);
-      padding:4px 12px; margin-bottom:1rem; border-radius:2px;
+    .hero-content {
+      position:absolute;
+      bottom:14%;
+      left:5%;
+      max-width:620px;
+      color:#fff;
+      z-index:3;
     }
+
+    .hero-label {
+      display:inline-block;
+      font-size:0.68rem;
+      font-weight:600;
+      letter-spacing:0.22em;
+      text-transform:uppercase;
+      color:#fff;
+      background:var(--red);
+      padding:4px 12px;
+      margin-bottom:1rem;
+      border-radius:2px;
+    }
+
     .hero-content h1 { font-size:clamp(2.4rem,5.5vw,4.2rem); line-height:1.05; margin-bottom:1rem; }
     .hero-content p { font-size:1rem; color:rgba(255,255,255,0.72); margin-bottom:1.75rem; line-height:1.7; }
     .hero-btns { display:flex; gap:1rem; flex-wrap:wrap; }
 
-    /* Progress bar */
-    .hero-progress { position:absolute; bottom:0; left:0; right:0; height:3px; background:rgba(255,255,255,0.12); }
+    .hero-progress { position:absolute; bottom:0; left:0; right:0; height:3px; background:rgba(255,255,255,0.12); z-index:4; }
     .hero-progress-bar { height:100%; background:var(--red-light); width:0; transition:width linear; }
 
-    /* Dots */
-    .hero-dots { position:absolute; bottom:2rem; right:5%; display:flex; gap:8px; }
+    .hero-dots { position:absolute; bottom:2rem; right:5%; display:flex; gap:8px; z-index:4; }
     .hero-dot { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.3); cursor:pointer; transition:background 0.2s, transform 0.2s; border:none; }
     .hero-dot.active { background:var(--red-light); transform:scale(1.3); }
 
-    /* Arrows */
-    .hero-arrow { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.18); color:#fff; width:44px; height:44px; border-radius:50%; cursor:pointer; font-size:1.2rem; display:flex; align-items:center; justify-content:center; transition:background 0.2s; }
-    .hero-arrow:hover { background:rgba(192,57,43,0.5); }
-    .hero-arrow.prev { left:2%; }
-    .hero-arrow.next { right:2%; }
-
-    /* ── CATEGORIAS GRID ── */
-    .cat-grid {
-      display:grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
-      gap:1px;
-      background:var(--border2);
-    }
-    .cat-card {
-      background:var(--charcoal2);
-      text-decoration:none;
-      transition:background 0.2s;
-      border-bottom:2px solid transparent;
-      overflow:hidden;
-    }
-    .cat-card:hover {
-      background:var(--charcoal3);
-      border-bottom-color:var(--red);
-    }
-    .cat-img-wrap {
-      width:100%; height:160px;
-      background:var(--charcoal3);
-      overflow:hidden;
+    .hero-arrow {
+      position:absolute; top:50%; transform:translateY(-50%);
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.18);
+      color:#fff;
+      width:44px; height:44px;
+      border-radius:50%;
+      cursor:pointer;
+      font-size:1.2rem;
       display:flex; align-items:center; justify-content:center;
+      transition:background 0.2s;
+      z-index:4;
     }
-    .cat-img-wrap img {
-      width:100%; height:100%; object-fit:contain;
-      padding:1rem;
-      transition:transform 0.3s;
-    }
-    .cat-card:hover .cat-img-wrap img { transform:scale(1.05); }
-    .cat-img-placeholder {
-      font-size:2.5rem;
-      opacity:0.3;
-    }
-    .cat-body { padding:1.25rem 1.5rem; }
-    .cat-label { font-size:0.6rem; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--red-light); margin-bottom:0.4rem; display:block; }
-    .cat-name { font-family:'Fraunces',serif; font-size:1.1rem; font-weight:700; color:#fff; margin-bottom:0.4rem; display:block; }
-    .cat-arrow { font-size:0.72rem; color:var(--text-muted); transition:color 0.2s; }
-    .cat-card:hover .cat-arrow { color:var(--red-light); }
+    .hero-arrow:hover { background:rgba(192,57,43,0.5); }
+    .hero-arrow.prev { left:12px; }
+    .hero-arrow.next { right:12px; }
 
-    /* ── DIFERENCIAIS ── */
-    .diff-grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fill, minmax(240px,1fr));
-      gap:1px;
-      background:var(--border2);
-      margin-top:2.5rem;
-    }
-    .diff-item {
-      background:var(--charcoal);
-      padding:2rem;
-    }
-    .diff-num {
-      font-family:'Fraunces',serif;
-      font-size:2.8rem; font-weight:700;
-      color:var(--red); line-height:1;
-      margin-bottom:0.5rem;
-    }
-    .diff-title {
-      font-family:'Fraunces',serif;
-      font-size:1rem; font-weight:600;
-      color:#fff; margin-bottom:0.4rem;
-    }
-    .diff-desc { font-size:0.8rem; color:var(--text-muted); line-height:1.7; }
-
-    /* Responsive */
     @media (max-width:768px) {
-      .cat-grid { grid-template-columns:1fr 1fr; }
-      .about-grid { grid-template-columns:1fr !important; }
+      .hero-content { left:1.25rem; right:1.25rem; max-width:none; bottom:16%; }
+      .hero-arrow.prev { left:8px; }
+      .hero-arrow.next { right:8px; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAV injetado pelo components.js -->
 <div data-nav></div>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- HERO SLIDER                                 -->
-<!-- ═══════════════════════════════════════════ -->
 <section class="hero" id="hero">
   <div class="hero-slides">
 
-    <!-- SLIDE 1 — Substituir src pelo vídeo real -->
-    <div class="hero-slide active" data-duration="7000">
-      <!-- <video autoplay muted loop playsinline><source src="media/hero1.mp4" type="video/mp4"></video> -->
-      <!-- Placeholder escuro até adicionar mídia -->
-      <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a1a1a 0%,#2c1010 100%);"></div>
+    <div class="hero-slide active" data-duration="6500">
+      <div class="hero-fallback"></div>
+      <video autoplay muted loop playsinline preload="metadata" poster="media/Amassadeira.png">
+        <source src="media/video_amassadeira.mp4" type="video/mp4">
+      </video>
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <span class="hero-label anim-1">Amassadeiras</span>
         <h1 class="anim-2">Massa perfeita,<br><em>toda vez</em></h1>
-        <p class="anim-3">Amassadeiras de alta performance para padarias que levam a sério cada fornada.</p>
+        <p class="anim-3">Linha confiável para padarias em crescimento, com operação simples e padrão profissional.</p>
         <div class="hero-btns anim-4">
-          <a href="/produtos/amassadeiras.html" class="btn btn-primary">Ver amassadeiras</a>
-          <a href="/contato.html" class="btn btn-outline">Solicitar orçamento</a>
+          <a href="/produtos/amassadeiras" class="btn btn-primary">Ver amassadeiras</a>
+          <a href="/contato" class="btn btn-outline">Solicitar orçamento</a>
         </div>
       </div>
     </div>
 
-    <!-- SLIDE 2 -->
-    <div class="hero-slide" data-duration="6000">
-      <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a1a1a 0%,#1a100a 100%);"></div>
+    <div class="hero-slide" data-duration="6500">
+      <div class="hero-fallback"></div>
+      <video autoplay muted loop playsinline preload="metadata" poster="media/Batedeira.png">
+        <source src="media/video_batedeira.mp4" type="video/mp4">
+      </video>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <span class="hero-label">Batedeiras</span>
+        <h1>Desempenho estável<br><em>no dia a dia</em></h1>
+        <p>Mais produtividade para confeitaria e panificação, com foco em custo-benefício e consistência.</p>
+        <div class="hero-btns">
+          <a href="/produtos/batedeiras" class="btn btn-primary">Ver batedeiras</a>
+          <a href="/contato" class="btn btn-outline">Solicitar orçamento</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-slide" data-duration="6500">
+      <div class="hero-fallback"></div>
+      <video autoplay muted loop playsinline preload="metadata" poster="media/Forno.jpg">
+        <source src="media/video_forno.mp4" type="video/mp4">
+      </video>
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <span class="hero-label">Fornos</span>
         <h1>O calor certo<br><em>na hora certa</em></h1>
-        <p>Fornos profissionais com distribuição uniforme de calor para resultados consistentes.</p>
+        <p>Forneamento consistente para operações que querem qualidade profissional sem complicar a rotina.</p>
         <div class="hero-btns">
-          <a href="/produtos/fornos.html" class="btn btn-primary">Ver fornos</a>
-          <a href="/contato.html" class="btn btn-outline">Solicitar orçamento</a>
+          <a href="/produtos/fornos" class="btn btn-primary">Ver fornos</a>
+          <a href="/contato" class="btn btn-outline">Solicitar orçamento</a>
         </div>
       </div>
     </div>
 
-    <!-- SLIDE 3 -->
-    <div class="hero-slide" data-duration="6000">
-      <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a1a1a 0%,#0f1a10 100%);"></div>
+    <div class="hero-slide" data-duration="6500">
+      <div class="hero-fallback"></div>
+      <video autoplay muted loop playsinline preload="metadata" poster="media/Laminadora.png">
+        <source src="media/video_laminadora.mp4" type="video/mp4">
+      </video>
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <span class="hero-label">Ultracongeladores</span>
-        <h1>Frescor que<br><em>dura mais</em></h1>
-        <p>Ultracongeladores que preservam sabor, textura e qualidade da sua produção.</p>
+        <span class="hero-label">Laminadoras</span>
+        <h1>Precisão no processo,<br><em>acabamento profissional</em></h1>
+        <p>Equipamentos pensados para quem precisa padronização, agilidade e crescimento com segurança.</p>
         <div class="hero-btns">
-          <a href="/produtos/ultracongeladores.html" class="btn btn-primary">Saiba mais</a>
-          <a href="/contato.html" class="btn btn-outline">Solicitar orçamento</a>
+          <a href="/produtos/laminadores" class="btn btn-primary">Ver laminadoras</a>
+          <a href="/contato" class="btn btn-outline">Solicitar orçamento</a>
         </div>
       </div>
     </div>
 
   </div>
 
-  <!-- Controles -->
   <div class="hero-progress"><div class="hero-progress-bar" id="progressBar"></div></div>
   <div class="hero-dots" id="heroDots"></div>
   <button class="hero-arrow prev" onclick="heroNav(-1)">‹</button>
   <button class="hero-arrow next" onclick="heroNav(1)">›</button>
 </section>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- LINHA DE PRODUTOS                           -->
-<!-- ═══════════════════════════════════════════ -->
-<section style="padding:5rem 2.5rem; background:var(--charcoal2);">
-  <div class="container">
-    <span class="section-label reveal">Linha Completa</span>
-    <h2 class="reveal" style="margin-bottom:0.5rem">Tudo que sua padaria<br><em>precisa crescer</em></h2>
-    <p class="reveal" style="color:var(--text-muted);margin-bottom:2.5rem;max-width:500px;">Sete linhas de equipamentos pensadas para pequenos e médios produtores que querem resultado profissional.</p>
-
-    <div class="cat-grid reveal">
-
-      <a href="/produtos/amassadeiras.html" class="cat-card">
-        <div class="cat-img-wrap">
-          <img src="media/Amassadeira.png" alt="Amassadeira">
-        </div>
-        <div class="cat-body">
-          <span class="cat-label">Linha</span>
-          <span class="cat-name">Amassadeiras</span>
-          <span class="cat-arrow">Ver modelos →</span>
-        </div>
-      </a>
-
-      <a href="/produtos/fornos.html" class="cat-card">
-        <div class="cat-img-wrap">
-          <!-- Adicionar: media/Forno.jpg -->
-          <span class="cat-img-placeholder">🔥</span>
-        </div>
-        <div class="cat-body">
-          <span class="cat-label">Linha</span>
-          <span class="cat-name">Fornos</span>
-          <span class="cat-arrow">Ver modelos →</span>
-        </div>
-      </a>
-
-      <a href="/produtos/batedeiras.html" class="cat-card">
-        <div class="cat-img-wrap">
-          <img src="media/Batedeira.png" alt="Batedeira">
-        </div>
-        <div class="cat-body">
-          <span class="cat-label">Linha</span>
-          <span class="cat-name">Batedeiras</span>
-          <span class="cat-arrow">Ver modelos →</span>
-        </div>
-      </a>
-
-      <a href="/produtos/divisoras.html" class="cat-card">
-        <div class="cat-img-wrap">
-          <!-- Adicionar: media/Divisora.jpg -->
-          <span class="cat-img-placeholder">✂️</span>
-        </div>
-        <div class="cat-body">
-          <span class="cat-label">Linha</span>
-          <span class="cat-name">Divisoras</span>
-          <span class="cat-arrow">Ver modelos →</span>
-        </div>
-      </a>
-
-      <a href="/produtos/ultracongeladores.html" class="cat-card">
-        <div class="cat-img-wrap">
-          <img src="media/Ultracongelador.jpg" alt="Ultracongelador">
-        </div>
-        <div class="cat-body">
-          <span class="cat-label">Linha</span>
-          <span class="cat-name">Ultracongeladores</span>
-          <span class="cat-arrow">Ver modelos →</span>
-        </div>
-      </a>
-
-      <a href="/produtos/laminadores.html" class="cat-card">
-        <div class="cat-img-wrap">
-          <img src="media/Laminadora.png" alt="Laminadora">
-        </div>
-        <div class="cat-body">
-          <span class="cat-label">Linha</span>
-          <span class="cat-name">Laminadores</span>
-          <span class="cat-arrow">Ver modelos →</span>
-        </div>
-      </a>
-
-      <a href="/produtos/blenders.html" class="cat-card">
-        <div class="cat-img-wrap">
-          <!-- Adicionar: media/Blender.jpg -->
-          <span class="cat-img-placeholder">⚡</span>
-        </div>
-        <div class="cat-body">
-          <span class="cat-label">Linha</span>
-          <span class="cat-name">Blenders</span>
-          <span class="cat-arrow">Ver modelos →</span>
-        </div>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SOBRE / NÚMEROS                             -->
-<!-- ═══════════════════════════════════════════ -->
-<section style="padding:5rem 2.5rem; background:var(--charcoal);">
-  <div class="container about-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;">
-    <div>
-      <span class="section-label reveal">Quem somos</span>
-      <h2 class="reveal" style="margin:0.5rem 0 1.25rem">Parceiros de quem<br><em>faz com amor</em></h2>
-      <p class="reveal" style="color:var(--text-muted);line-height:1.8;margin-bottom:1rem;">
-        A VIVAMAQ é uma linha desenvolvida para quem quer crescer com padrão profissional — 
-        profissional, confiável e com suporte de verdade.
-      </p>
-      <p class="reveal" style="color:var(--text-muted);line-height:1.8;">
-        Atendemos padarias e operações em crescimento em todo o Brasil, 
-        com equipamentos confiáveis, simples de operar e com excelente custo-benefício.
-      </p>
-      <a href="/sobre.html" class="btn btn-outline reveal" style="margin-top:1.75rem;display:inline-block;">Conheça nossa história</a>
-    </div>
-
-    <div class="diff-grid reveal">
-      <div class="diff-item">
-        <div class="diff-num">7</div>
-        <div class="diff-title">Linhas de produto</div>
-        <div class="diff-desc">Do forno ao ultracongelador, tudo sob um único fornecedor.</div>
-      </div>
-      <div class="diff-item">
-        <div class="diff-num">100%</div>
-        <div class="diff-title">Suporte técnico</div>
-        <div class="diff-desc">Time especializado para instalação, manutenção e peças.</div>
-      </div>
-      <div class="diff-item">
-        <div class="diff-num">BR</div>
-        <div class="diff-title">Todo o Brasil</div>
-        <div class="diff-desc">Entrega e assistência em todo o território nacional.</div>
-      </div>
-      <div class="diff-item">
-        <div class="diff-num">∞</div>
-        <div class="diff-title">Peças e garantia</div>
-        <div class="diff-desc">Estoque de reposição e garantia estendida disponível.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- ASSISTÊNCIA TÉCNICA BANNER                  -->
-<!-- ═══════════════════════════════════════════ -->
-<section style="padding:4rem 2.5rem; background:var(--red); text-align:center;">
-  <div class="container">
-    <span style="font-size:0.68rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.7);display:block;margin-bottom:0.75rem;" class="reveal">Suporte</span>
-    <h2 class="reveal" style="color:#fff;margin-bottom:0.75rem">Assistência Técnica <em style="color:rgba(255,255,255,0.85);">especializada</em></h2>
-    <p class="reveal" style="color:rgba(255,255,255,0.8);max-width:480px;margin:0 auto 2rem;line-height:1.7;">
-      Máquina parada é prejuízo. Nossa equipe técnica resolve rápido, com peças originais e atendimento ágil.
-    </p>
-    <a href="/assistencia.html" class="reveal" style="display:inline-block;background:#fff;color:var(--red);font-size:0.78rem;font-weight:700;letter-spacing:0.06em;padding:0.85rem 2rem;border-radius:2px;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
-      Solicitar assistência
-    </a>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- CTA FINAL                                   -->
-<!-- ═══════════════════════════════════════════ -->
-<section style="padding:5rem 2.5rem; background:var(--charcoal2); text-align:center;">
-  <span class="section-label reveal">Fale com a gente</span>
-  <h2 class="reveal" style="margin:0.5rem 0 1rem">Pronto para <em>equipar</em><br>sua padaria?</h2>
-  <p class="reveal" style="color:var(--text-muted);max-width:480px;margin:0 auto 2rem;line-height:1.7;">
-    Nosso time comercial te ajuda a escolher os equipamentos certos para o seu negócio e seu orçamento.
-  </p>
-  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;" class="reveal">
-    <a href="/contato.html" class="btn btn-primary">Solicitar orçamento</a>
-    <a href="https://wa.me/5554993210110" target="_blank" class="btn btn-outline">WhatsApp</a>
-  </div>
-</section>
-
-<!-- FOOTER injetado pelo components.js -->
 <div data-footer></div>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- SCRIPTS                                     -->
-<!-- ═══════════════════════════════════════════ -->
 <script src="components.js"></script>
 <script>
-// ── HERO SLIDER CONTROLLER ──
-let currentSlide = 0, timer = null, paused = false;
-const slides = document.querySelectorAll('.hero-slide');
-const dotsEl  = document.getElementById('heroDots');
-const barEl   = document.getElementById('progressBar');
+let currentSlide = 0;
+let timer = null;
+let paused = false;
 
-slides.forEach((_, i) => {
+const slides = document.querySelectorAll('.hero-slide');
+const dotsEl = document.getElementById('heroDots');
+const barEl = document.getElementById('progressBar');
+
+slides.forEach((slide, i) => {
   const d = document.createElement('button');
   d.className = 'hero-dot' + (i === 0 ? ' active' : '');
   d.onclick = () => goTo(i);
   dotsEl.appendChild(d);
+
+  const video = slide.querySelector('video');
+  if (video) {
+    video.addEventListener('error', () => {
+      console.warn('Vídeo não carregou:', video.currentSrc);
+    });
+  }
 });
+
+function playCurrentVideo() {
+  slides.forEach((s, i) => {
+    const v = s.querySelector('video');
+    if (!v) return;
+    if (i === currentSlide) {
+      v.currentTime = 0;
+      const promise = v.play();
+      if (promise) promise.catch(() => {});
+    } else {
+      v.pause();
+    }
+  });
+}
 
 function goTo(n) {
   slides[currentSlide].classList.remove('active');
   dotsEl.children[currentSlide].classList.remove('active');
+
   currentSlide = (n + slides.length) % slides.length;
+
   slides[currentSlide].classList.add('active');
   dotsEl.children[currentSlide].classList.add('active');
-  slides.forEach(s => { const v = s.querySelector('video'); if(v) v.pause(); });
-  const cv = slides[currentSlide].querySelector('video');
-  if (cv) { cv.currentTime = 0; cv.play(); }
+
+  playCurrentVideo();
   startTimer();
 }
 
-function heroNav(dir) { goTo(currentSlide + dir); }
+function heroNav(dir) {
+  goTo(currentSlide + dir);
+}
 
 function startTimer() {
   clearInterval(timer);
-  barEl.style.transition = 'none'; barEl.style.width = '0%';
-  const dur = parseInt(slides[currentSlide].dataset.duration) || 6000;
+  barEl.style.transition = 'none';
+  barEl.style.width = '0%';
+
+  const dur = parseInt(slides[currentSlide].dataset.duration || '6500', 10);
+
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       barEl.style.transition = `width ${dur}ms linear`;
       barEl.style.width = '100%';
     });
   });
-  timer = setInterval(() => { if (!paused) goTo(currentSlide + 1); }, dur);
+
+  timer = setInterval(() => {
+    if (!paused) goTo(currentSlide + 1);
+  }, dur);
 }
 
 let sx = 0;
@@ -420,6 +262,7 @@ document.querySelector('.hero').addEventListener('touchend', e => {
 document.querySelector('.hero').addEventListener('mouseenter', () => paused = true);
 document.querySelector('.hero').addEventListener('mouseleave', () => paused = false);
 
+playCurrentVideo();
 startTimer();
 </script>
 
