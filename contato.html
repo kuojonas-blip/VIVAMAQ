@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contato — VIVAMAQ</title>
+  <meta name="description" content="Entre em contato com a VIVAMAQ. Solicite orçamento, tire dúvidas ou agende uma visita técnica.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .contato-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; }
+    .form-group { margin-bottom:1.25rem; }
+    .form-group label { display:block; font-size:0.72rem; font-weight:600; letter-spacing:0.08em; color:var(--text-muted); margin-bottom:0.4rem; text-transform:uppercase; }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width:100%; background:var(--charcoal3); border:1px solid var(--border);
+      color:var(--text); padding:0.75rem 1rem; font-family:'Sora',sans-serif;
+      font-size:0.85rem; border-radius:2px; outline:none;
+      transition:border-color 0.2s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color:var(--red); }
+    .form-group textarea { resize:vertical; min-height:120px; }
+    .form-group select option { background:var(--charcoal3); }
+    .info-item { display:flex; gap:1rem; align-items:flex-start; margin-bottom:1.5rem; }
+    .info-icon { width:36px; height:36px; background:var(--charcoal3); border:1px solid var(--border); border-radius:2px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1rem; }
+    .info-label { font-size:0.65rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--red-light); margin-bottom:2px; }
+    .info-val { font-size:0.85rem; color:var(--text-muted); line-height:1.5; }
+    .info-val a { color:var(--text-muted); transition:color 0.2s; }
+    .info-val a:hover { color:var(--red-light); }
+    @media(max-width:768px){ .contato-grid { grid-template-columns:1fr; gap:2.5rem; } }
+  </style>
+</head>
+<body>
+<div data-nav></div>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="section-label">Fale com a gente</span>
+    <h1>Solicite seu<br><em>orçamento</em></h1>
+    <div class="divider"></div>
+    <p style="color:var(--text-muted);line-height:1.8;margin-top:1rem;">
+      Nossa equipe comercial responde em até 1 dia útil.
+    </p>
+  </div>
+</section>
+
+<section style="padding:5rem 2.5rem;background:var(--charcoal);">
+  <div class="container contato-grid">
+
+    <!-- FORMULÁRIO -->
+    <div>
+      <span class="section-label">Formulário</span>
+      <h2 style="margin:0.4rem 0 2rem">Nos conte o que<br><em>você precisa</em></h2>
+
+      <form action="https://formsubmit.co/comercial@vivamaq.com" method="POST">
+        <input type="hidden" name="_subject" value="Novo orçamento — VIVAMAQ">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="/obrigado.html">
+
+        <div class="form-group">
+          <label>Nome completo *</label>
+          <input type="text" name="nome" required placeholder="Seu nome">
+        </div>
+        <div class="form-group">
+          <label>E-mail *</label>
+          <input type="email" name="email" required placeholder="seu@email.com">
+        </div>
+        <div class="form-group">
+          <label>WhatsApp</label>
+          <input type="tel" name="whatsapp" placeholder="(00) 00000-0000">
+        </div>
+        <div class="form-group">
+          <label>Produto de interesse</label>
+          <select name="produto">
+            <option value="">Selecione...</option>
+            <option>Amassadeira</option>
+            <option>Forno</option>
+            <option>Batedeira</option>
+            <option>Divisora</option>
+            <option>Ultracongelador</option>
+            <option>Laminador</option>
+            <option>Blender</option>
+            <option>Vários produtos</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Mensagem</label>
+          <textarea name="mensagem" placeholder="Descreva sua necessidade, quantidade, capacidade desejada..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;text-align:center;">Enviar solicitação</button>
+      </form>
+    </div>
+
+    <!-- INFORMAÇÕES -->
+    <div>
+      <span class="section-label">Contato direto</span>
+      <h2 style="margin:0.4rem 0 2rem">Prefere falar<br><em>agora?</em></h2>
+
+      <div class="info-item">
+        <div class="info-icon">💬</div>
+        <div>
+          <div class="info-label">WhatsApp</div>
+          <div class="info-val"><a href="https://wa.me/5554993210110" target="_blank">(54) 99321-0110</a></div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">✉️</div>
+        <div>
+          <div class="info-label">E-mail</div>
+          <div class="info-val"><a href="mailto:comercial@vivamaq.com">comercial@vivamaq.com</a></div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">📍</div>
+        <div>
+          <div class="info-label">Localização</div>
+          <div class="info-val">São Paulo — SP</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">🕐</div>
+        <div>
+          <div class="info-label">Horário de atendimento</div>
+          <div class="info-val">Segunda a Sexta, 8h às 18h</div>
+        </div>
+      </div>
+
+      <div style="margin-top:2rem;padding:1.5rem;background:var(--charcoal2);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:2px;">
+        <div style="font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--red-light);margin-bottom:0.5rem;">Distribuidora oficial</div>
+        <div style="font-size:0.85rem;color:var(--text-muted);line-height:1.7;">Somos o distribuidor oficial da <strong style="color:var(--text);">SINMAG</strong> no Brasil — garantia de peças originais e suporte técnico autorizado.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div data-footer></div>
+<script src="components.js"></script>
+</body>
+</html>

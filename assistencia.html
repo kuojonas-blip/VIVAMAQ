@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assistência Técnica — VIVAMAQ</title>
+  <meta name="description" content="Assistência técnica especializada para equipamentos SINMAG. Peças originais, atendimento ágil em todo o Brasil.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .servicos-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1px; background:var(--border2); margin-top:2.5rem; }
+    .servico-item { background:var(--charcoal2); padding:2rem; }
+    .servico-num { font-family:'Fraunces',serif; font-size:2rem; font-weight:700; color:var(--red); margin-bottom:0.75rem; }
+    .servico-title { font-family:'Fraunces',serif; font-size:1.1rem; color:#fff; margin-bottom:0.5rem; }
+    .servico-desc { font-size:0.82rem; color:var(--text-muted); line-height:1.7; }
+  </style>
+</head>
+<body>
+<div data-nav></div>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="section-label">Suporte</span>
+    <h1>Assistência Técnica<br><em>especializada</em></h1>
+    <div class="divider"></div>
+    <p style="color:var(--text-muted);line-height:1.8;margin-top:1rem;">
+      Máquina parada é prejuízo. Nossa equipe técnica resolve rápido, com peças originais SINMAG e atendimento ágil.
+    </p>
+  </div>
+</section>
+
+<section style="padding:5rem 2.5rem;background:var(--charcoal);">
+  <div class="container">
+    <span class="section-label reveal">O que oferecemos</span>
+    <h2 class="reveal" style="margin:0.4rem 0 0.5rem">Suporte completo para<br><em>seu equipamento</em></h2>
+    <div class="servicos-grid">
+      <div class="servico-item reveal">
+        <div class="servico-num">01</div>
+        <div class="servico-title">Instalação e comissionamento</div>
+        <div class="servico-desc">Instalamos e configuramos seu equipamento para garantir o melhor desempenho desde o primeiro uso.</div>
+      </div>
+      <div class="servico-item reveal d1">
+        <div class="servico-num">02</div>
+        <div class="servico-title">Manutenção preventiva</div>
+        <div class="servico-desc">Visitas programadas para manter seus equipamentos em perfeito estado e evitar paradas inesperadas.</div>
+      </div>
+      <div class="servico-item reveal d2">
+        <div class="servico-num">03</div>
+        <div class="servico-title">Manutenção corretiva</div>
+        <div class="servico-desc">Atendimento rápido quando sua máquina para. Diagnóstico preciso e reparo com peças originais.</div>
+      </div>
+      <div class="servico-item reveal d3">
+        <div class="servico-num">04</div>
+        <div class="servico-title">Peças originais SINMAG</div>
+        <div class="servico-desc">Estoque de peças de reposição originais para garantir a vida útil e a garantia do seu equipamento.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:5rem 2.5rem;background:var(--charcoal2);">
+  <div class="container" style="max-width:700px;text-align:center;">
+    <span class="section-label reveal">Solicitar atendimento</span>
+    <h2 class="reveal" style="margin:0.5rem 0 1rem">Precisa de suporte<br><em>agora?</em></h2>
+    <p class="reveal" style="color:var(--text-muted);line-height:1.7;margin-bottom:2rem;">
+      Entre em contato pelo WhatsApp ou preencha o formulário de contato. Nossa equipe responde em até 1 dia útil.
+    </p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;" class="reveal">
+      <a href="https://wa.me/5554993210110" target="_blank" class="btn btn-primary">WhatsApp agora</a>
+      <a href="contato.html" class="btn btn-outline">Abrir chamado</a>
+    </div>
+  </div>
+</section>
+
+<div data-footer></div>
+<script src="components.js"></script>
+</body>
+</html>
