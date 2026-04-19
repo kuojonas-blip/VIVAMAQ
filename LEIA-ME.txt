@@ -5,7 +5,7 @@
 ESTRUTURA DE PASTAS (montar exatamente assim):
 ──────────────────────────────────────────
 vivamaq/
-├── index.html          ← página inicial
+├── /          ← página inicial
 ├── style.css           ← estilos globais
 ├── components.js       ← nav + footer + whatsapp
 ├── vercel.json         ← config de deploy
@@ -29,7 +29,7 @@ no components.js (linha com "filter:brightness").
 COMO ADICIONAR FOTOS DOS PRODUTOS FALTANTES:
 ──────────────────────────────────────────
 1. Coloque as fotos na pasta media/
-2. No index.html, procure os comentários:
+2. No /, procure os comentários:
    <!-- Adicionar: media/Forno.jpg -->
 3. Substitua o bloco pelo padrão:
    <img src="media/NomeDaFoto.jpg" alt="Nome">
@@ -53,3 +53,9 @@ Para alterar qualquer dado, edite o bloco
 CONFIG no início do arquivo components.js.
 
 ═══════════════════════════════════════════
+
+
+URLS PADRONIZADAS:
+──────────────────────────────────────────
+O site agora usa links sem .html, compatíveis com o
+cleanUrls do Vercel (ex.: /contato e /sobre).

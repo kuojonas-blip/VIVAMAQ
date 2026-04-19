@@ -128,3 +128,58 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 });
+
+
+// MOBILE MENU PREMIUM
+const MOBILE_MENU = `
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-header">
+    <img src="/logo.jpeg" style="height:32px; filter:brightness(0) invert(1);">
+    <button id="closeMenu">✕</button>
+  </div>
+
+  <div class="mobile-links">
+    <a href="/produtos/amassadeiras">Amassadeiras</a>
+    <a href="/produtos/fornos">Fornos</a>
+    <a href="/produtos/batedeiras">Batedeiras</a>
+    <a href="/produtos/divisoras">Divisoras</a>
+    <a href="/produtos/ultracongeladores">Ultracongeladores</a>
+    <a href="/produtos/laminadores">Laminadores</a>
+    <a href="/produtos/blenders">Blenders</a>
+
+    <a href="/sobre">Sobre</a>
+    <a href="/assistencia">Assistência</a>
+    <a href="/contato" class="mobile-cta">Solicitar orçamento</a>
+
+    <a href="https://instagram.com/vivamaq" target="_blank" class="mobile-instagram">
+      Instagram
+    </a>
+  </div>
+</div>
+`;
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.body.insertAdjacentHTML('beforeend', MOBILE_MENU);
+
+  const menu = document.getElementById('mobileMenu');
+  const overlay = document.getElementById('mobileOverlay');
+
+  document.getElementById('openMenu')?.addEventListener('click', () => {
+    menu.classList.add('active');
+    overlay.classList.add('active');
+  });
+
+  document.getElementById('closeMenu')?.addEventListener('click', closeMenu);
+  overlay?.addEventListener('click', closeMenu);
+
+  function closeMenu() {
+    menu.classList.remove('active');
+    overlay.classList.remove('active');
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeMenu();
+  });
+});
