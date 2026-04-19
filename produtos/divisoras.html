@@ -3,9 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Divisoras — VIVAMAQ</title>
-  <meta name="description" content="Divisoras profissionais SINMAG. Distribuidora oficial no Brasil — VIVAMAQ.">
-  <link rel="stylesheet" href="/style.css">
+  <title>Boleadoras — VIVAMAQ</title>
+  <meta name="description" content="Boleadoras VIVAMAQ para padronização da massa.">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .catalog-intro { color:var(--text-muted); line-height:1.8; margin-top:1rem; max-width:760px; }
+    .catalog-empty { padding:2rem; background:var(--charcoal2); border:1px solid var(--border2); color:var(--text-muted); }
+  </style>
 </head>
 <body>
 <div data-nav></div>
@@ -13,9 +17,9 @@
 <section class="page-hero">
   <div class="page-hero-inner">
     <span class="section-label">Linha de Produtos</span>
-    <h1>Divisoras</h1>
+    <h1>Boleadoras</h1>
     <div class="divider"></div>
-    <p style="color:var(--text-muted);line-height:1.8;margin-top:1rem;">Divisoras de massa manuais e hidráulicas. Precisão no corte, uniformidade nos pesos e agilidade na produção.</p>
+    <p class="catalog-intro">Equipamentos para ganho de agilidade e padronização no preparo da massa.</p>
   </div>
 </section>
 
@@ -23,30 +27,8 @@
   <div class="container">
     <span class="section-label reveal">Modelos disponíveis</span>
     <h2 class="reveal" style="margin:0.4rem 0 2.5rem">Encontre o modelo<br><em>ideal para você</em></h2>
-
-    <div class="prod-card-grid">
-      <a href="#" class="prod-card">
-    <span class="prod-card-tag">Divisora Manual</span>
-    <span class="prod-card-name">DM-36</span>
-    <span class="prod-card-sub">36 porções uniformes</span>
-    <div class="prod-card-specs">
-      <span class="prod-card-spec">36 cortes</span>
-      <span class="prod-card-spec">Manual</span>
-    </div>
-    <span class="prod-card-cta">Solicitar orçamento →</span>
-  </a>
-  <a href="#" class="prod-card">
-    <span class="prod-card-tag">Divisora Hidráulica</span>
-    <span class="prod-card-name">DH-36</span>
-    <span class="prod-card-sub">Operação hidráulica para alta produção</span>
-    <div class="prod-card-specs">
-      <span class="prod-card-spec">36 cortes</span>
-      <span class="prod-card-spec">Hidráulica</span>
-      <span class="prod-card-spec">220V</span>
-    </div>
-    <span class="prod-card-cta">Solicitar orçamento →</span>
-  </a>
-    </div>
+    <div id="catalog-grid" class="prod-card-grid reveal"></div>
+    <div id="catalog-empty" class="catalog-empty" style="display:none;">Nenhum modelo cadastrado nesta categoria ainda.</div>
   </div>
 </section>
 
@@ -61,6 +43,32 @@
 </section>
 
 <div data-footer></div>
-<script src="/components.js"></script>
+<script src="../catalogo.js"></script>
+<script src="../components.js"></script>
+<script>
+  const CATEGORIAS = ["Boleadora"];
+  const categoriaAtual = CATEGORIAS;
+  const produtos = (window.VIVAMAQ_CATALOGO || []).filter(item => categoriaAtual.includes(item.categoria));
+
+  const grid = document.getElementById('catalog-grid');
+  const empty = document.getElementById('catalog-empty');
+
+  if (!produtos.length) {
+    grid.style.display = 'none';
+    empty.style.display = 'block';
+  } else {
+    grid.innerHTML = produtos.map(item => `
+      <a href="../contato?produto=${encodeURIComponent(item.codigo)}" class="prod-card">
+        <span class="prod-card-tag">${item.categoria}</span>
+        <span class="prod-card-name">${item.codigo}</span>
+        <span class="prod-card-sub">${item.descricao || 'Consulte disponibilidade e especificações.'}</span>
+        <div class="prod-card-specs">
+          <span class="prod-card-spec">${item.tipo}</span>
+        </div>
+        <span class="prod-card-cta">Solicitar orçamento →</span>
+      </a>
+    `).join('');
+  }
+</script>
 </body>
 </html>

@@ -1,0 +1,11 @@
+Página inicial configurada com 4 espaços de vídeo no hero:
+
+1) media/video_amassadeira.mp4
+2) media/video_batedeira.mp4
+3) media/video_laminadora.mp4
+4) media/video_forno.mp4
+
+Observações:
+- O site já está pronto para rodar esses 4 vídeos.
+- Se o vídeo ainda não estiver na pasta media/, o slide mostra um fundo de fallback.
+- Use MP4 (H.264), sem áudio, para melhor compatibilidade.

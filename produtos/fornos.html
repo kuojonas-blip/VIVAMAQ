@@ -4,8 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fornos — VIVAMAQ</title>
-  <meta name="description" content="Fornos profissionais SINMAG. Distribuidora oficial no Brasil — VIVAMAQ.">
-  <link rel="stylesheet" href="/style.css">
+  <meta name="description" content="Fornos VIVAMAQ para panificação e food service.">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .catalog-intro { color:var(--text-muted); line-height:1.8; margin-top:1rem; max-width:760px; }
+    .catalog-empty { padding:2rem; background:var(--charcoal2); border:1px solid var(--border2); color:var(--text-muted); }
+  </style>
 </head>
 <body>
 <div data-nav></div>
@@ -15,7 +19,7 @@
     <span class="section-label">Linha de Produtos</span>
     <h1>Fornos</h1>
     <div class="divider"></div>
-    <p style="color:var(--text-muted);line-height:1.8;margin-top:1rem;">Fornos de lastro, convecção e rotativos SINMAG. Distribuição uniforme de calor para resultados consistentes em cada fornada.</p>
+    <p class="catalog-intro">Fornos para operações que precisam consistência de calor, produtividade e bom custo-benefício.</p>
   </div>
 </section>
 
@@ -23,29 +27,8 @@
   <div class="container">
     <span class="section-label reveal">Modelos disponíveis</span>
     <h2 class="reveal" style="margin:0.4rem 0 2.5rem">Encontre o modelo<br><em>ideal para você</em></h2>
-
-    <div class="prod-card-grid">
-      <a href="#" class="prod-card">
-    <span class="prod-card-tag">Forno de Lastro</span>
-    <span class="prod-card-name">FL-2B</span>
-    <span class="prod-card-sub">2 câmaras independentes</span>
-    <div class="prod-card-specs">
-      <span class="prod-card-spec">2 câmaras</span>
-      <span class="prod-card-spec">220V</span>
-    </div>
-    <span class="prod-card-cta">Solicitar orçamento →</span>
-  </a>
-  <a href="#" class="prod-card">
-    <span class="prod-card-tag">Forno Convecção</span>
-    <span class="prod-card-name">FC-10</span>
-    <span class="prod-card-sub">10 esteiras, ideal para produção média</span>
-    <div class="prod-card-specs">
-      <span class="prod-card-spec">10 esteiras</span>
-      <span class="prod-card-spec">380V</span>
-    </div>
-    <span class="prod-card-cta">Solicitar orçamento →</span>
-  </a>
-    </div>
+    <div id="catalog-grid" class="prod-card-grid reveal"></div>
+    <div id="catalog-empty" class="catalog-empty" style="display:none;">Nenhum modelo cadastrado nesta categoria ainda.</div>
   </div>
 </section>
 
@@ -60,6 +43,32 @@
 </section>
 
 <div data-footer></div>
-<script src="/components.js"></script>
+<script src="../catalogo.js"></script>
+<script src="../components.js"></script>
+<script>
+  const CATEGORIAS = ["Forno", "Forno Pizza"];
+  const categoriaAtual = CATEGORIAS;
+  const produtos = (window.VIVAMAQ_CATALOGO || []).filter(item => categoriaAtual.includes(item.categoria));
+
+  const grid = document.getElementById('catalog-grid');
+  const empty = document.getElementById('catalog-empty');
+
+  if (!produtos.length) {
+    grid.style.display = 'none';
+    empty.style.display = 'block';
+  } else {
+    grid.innerHTML = produtos.map(item => `
+      <a href="../contato?produto=${encodeURIComponent(item.codigo)}" class="prod-card">
+        <span class="prod-card-tag">${item.categoria}</span>
+        <span class="prod-card-name">${item.codigo}</span>
+        <span class="prod-card-sub">${item.descricao || 'Consulte disponibilidade e especificações.'}</span>
+        <div class="prod-card-specs">
+          <span class="prod-card-spec">${item.tipo}</span>
+        </div>
+        <span class="prod-card-cta">Solicitar orçamento →</span>
+      </a>
+    `).join('');
+  }
+</script>
 </body>
 </html>

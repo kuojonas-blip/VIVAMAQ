@@ -1,0 +1,23 @@
+Integração do catálogo no site VIVAMAQ
+
+O site agora lê os modelos a partir do arquivo:
+- catalogo.js
+
+Para adicionar, remover ou alterar produtos:
+- edite apenas o arquivo catalogo.js
+
+As páginas conectadas ao catálogo são:
+- /produtos/amassadeiras
+- /produtos/batedeiras
+- /produtos/blenders
+- /produtos/divisoras   (usada aqui para Boleadoras)
+- /produtos/fornos
+- /produtos/laminadores
+- /produtos/ultracongeladores
+
+Estrutura do catálogo:
+{ codigo, categoria, tipo, descricao }
+
+Observação:
+- a página divisoras foi aproveitada para mostrar a categoria Boleadora
+- a página fornos mostra Forno e Forno Pizza
