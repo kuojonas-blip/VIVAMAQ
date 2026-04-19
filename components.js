@@ -134,15 +134,16 @@ const MOBILE = `
 `;
 
 // ─────────────────────────────────────────
-// INIT
+// INIT — injeta imediatamente (sem DOMContentLoaded)
 // ─────────────────────────────────────────
-document.addEventListener("DOMContentLoaded", () => {
-
-  document.querySelector("[data-nav]").outerHTML = NAV;
-  document.querySelector("[data-footer]").outerHTML = FOOTER;
+(function init() {
+  const navEl    = document.querySelector("[data-nav]");
+  const footerEl = document.querySelector("[data-footer]");
+  if (navEl)    navEl.outerHTML    = NAV;
+  if (footerEl) footerEl.outerHTML = FOOTER;
   document.body.insertAdjacentHTML("beforeend", MOBILE);
 
-  const menu = document.getElementById("menu");
+  const menu    = document.getElementById("menu");
   const overlay = document.getElementById("overlay");
 
   document.getElementById("openMenu").onclick = () => {
@@ -153,9 +154,14 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("closeMenu").onclick = closeMenu;
   overlay.onclick = closeMenu;
 
-  function closeMenu(){
+  function closeMenu() {
     menu.classList.remove("active");
     overlay.classList.remove("active");
   }
 
-});
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+})();

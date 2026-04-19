@@ -248,8 +248,13 @@ hero.addEventListener('touchend',   e => { const d = tx - e.changedTouches[0].cl
 playVid();
 resetProgress();
 
-// Edge fix: segundo disparo após 300ms
-setTimeout(() => { playVid(); }, 300);
+// Scroll reveal (rodando após tudo carregar)
+window.addEventListener('load', () => {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+});
 </script>
 
 </body>
